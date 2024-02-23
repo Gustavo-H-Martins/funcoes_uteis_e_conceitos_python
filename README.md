@@ -1,20 +1,20 @@
 # Python Programming Concepts and Useful Functions
 
-## 🧑🏽 Colaboradores
-Este projeto foi criado por:
-
-- Gustavo H Martins ([GitHub](https://github.com/Gustavo-H-Martins) | [LinkedIn](https://www.linkedin.com/in/gustavo-henrique-lopes-martins-361789192/))
-
 ## Sobre o Projeto
 Este repositório contém uma coleção de funções úteis e conceitos de programação em Python. É destinado a ajudar desenvolvedores iniciantes e intermediários a aprender e praticar os fundamentos da programação em Python.
 
 ## Conteúdo do Repositório
 O repositório é organizado em diferentes diretórios, cada um abordando um conceito ou função específica. Aqui está uma visão geral do conteúdo:
 
-- [VAZIO POR ENQUANTO](): Descrição do conteúdo: VAZIO.
-- [VAZIO POR ENQUANTO](): Descrição do conteúdo: VAZIO.
-- [VAZIO POR ENQUANTO](): Descrição do conteúdo: VAZIO.
-- ...
+- [Programação ](programacao_dinamica/fibonacci_dinamica.py) - Descrição do conteúdo:
+    -
+        Um exemplo simples, mas bastante relevante de como usar programação dinâmica e otimizar `n` vezes seu script python.
+- [Templates e Modelos](templates_modelos/README.md) - Descrição do conteúdo: 
+    -
+        Alguns templates e modelos de código usuais com o objetivo de atender ao conceito DRY: (`Don't repeat yourself`).
+- [Documentação e utilidades](docs/changelog.md) - Descrição do conteúdo:
+    -
+        Arquivos e artigos relevantes para o dia a dia de desenvolvimento em python
 
 ## Como Contribuir
 Se você gostaria de contribuir para este projeto, você pode seguir estes passos:
@@ -28,3 +28,10 @@ Se você gostaria de contribuir para este projeto, você pode seguir estes passo
 
 ## Licença
 Este projeto é licenciado sob a [Licença MIT](LICENSE).
+
+## 🧑🏽 Colaboradores
+Este projeto foi criado por:
+
+- Gustavo H Martins ([GitHub](https://github.com/Gustavo-H-Martins) | [LinkedIn](https://www.linkedin.com/in/gustavo-henrique-lopes-martins-361789192/))
+
+[![Gustavo-H-Martins](https://github-readme-stats.vercel.app/api?username=Gustavo-H-Martins&show_icons=true&theme=radical)](https://github.com/Gustavo-H-Martins)
