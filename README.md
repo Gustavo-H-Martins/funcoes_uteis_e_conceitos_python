@@ -8,13 +8,13 @@ O repositório é organizado em diferentes diretórios, cada um abordando um con
 
 - [Programação ](programacao_dinamica/fibonacci_dinamica.py) - Descrição do conteúdo:
     -
-        Um exemplo simples, mas bastante relevante de como usar programação dinâmica e otimizar `n` vezes seu script python.
+    Um exemplo simples, mas bastante relevante de como usar programação dinâmica e otimizar `n` vezes seu script python.
 - [Templates e Modelos](templates_modelos/README.md) - Descrição do conteúdo: 
     -
-        Alguns templates e modelos de código usuais com o objetivo de atender ao conceito DRY: (`Don't repeat yourself`).
+    Alguns templates e modelos de código usuais com o objetivo de atender ao conceito DRY: (`Don't repeat yourself`).
 - [Documentação e utilidades](docs/changelog.md) - Descrição do conteúdo:
     -
-        Arquivos e artigos relevantes para o dia a dia de desenvolvimento em python
+    Arquivos e artigos relevantes para o dia a dia de desenvolvimento em python
 
 ## Como Contribuir
 Se você gostaria de contribuir para este projeto, você pode seguir estes passos:
