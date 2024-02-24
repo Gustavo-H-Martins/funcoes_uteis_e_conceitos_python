@@ -8,9 +8,9 @@ from time import sleep
 navegador = SeleniumDriver()
 driver = navegador.run()
 # Defindo um parâmetro padrão de busca
-parametro_busca_padrao = '"suplementos alimentar";site:blog;inurl:https://*'
+parametro_busca_padrao = '"blogs de suplementos alimentares'
 # Dando a oportunidade do usuário inserir uma nova busca
-parametro_busca = input("Insira um parâmetro de busca, caso oposto vamos pegar um padrão:\n\n")
+parametro_busca = '' # input("Insira um parâmetro de busca, caso oposto vamos pegar um padrão:\n\n")
 # se o usuário não inserir pega o padrão
 parametro_busca = parametro_busca_padrao if parametro_busca == "" else parametro_busca
 # Define a url
@@ -25,7 +25,6 @@ driver.maximize_window()
 resultados = driver.find_elements(By.CLASS_NAME, "ULSxyf")
 
 [print(resultado.text) for resultado in resultados]
-
 # pausando o processo, é interessante para debugar rsrs :D
-sleep(5)
+sleep(300)
 driver.quit()
