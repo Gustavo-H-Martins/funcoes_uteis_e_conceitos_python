@@ -29,6 +29,7 @@ async def read_item(
     url: str, limit: int = None, start_stars: int = None, end_stars: int = None
 ):  
     lista_raspagem = ler_lista_raspagem()
+    print(lista_raspagem)
     if url not in lista_raspagem:
         escrever_lista_raspagem(url)
         logger.warning(f"url {url} ainda não mapeada!")

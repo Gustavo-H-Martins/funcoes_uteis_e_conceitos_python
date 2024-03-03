@@ -22,7 +22,7 @@ def escrever_lista_raspagem(texto:str):
     """Realiza a escrita de dados dentro do arquivo de configurações de lista de raspagem"""
 
     with open(file=CRAWLER_LIST_PATH, mode="+a") as f:
-        f.write(texto.strip())
+        f.write(f"{texto.strip()}\n")
         f.close()
     
     logger.info(f"Salvo linha com valor {texto}")
@@ -37,7 +37,7 @@ def deletar_lista_raspasgem(texto:str):
         # Escreve todas as linhas, exceto a que queremos deletar
         for linha in linhas:
             if linha.strip() != texto.strip():
-                f.write(linha)
+                f.write(f"{linha}\n")
         # Remove qualquer conteúdo que possa ter sobrado do arquivo original
         f.truncate()
     logger.info(f"Deletada linha com valor {texto}")
