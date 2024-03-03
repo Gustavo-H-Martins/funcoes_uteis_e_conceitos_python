@@ -13,8 +13,9 @@ CRAWLER_LIST_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),"conf
 def ler_lista_raspagem() -> list:
     """Realiza a leitura dos dados dentro do arquivo de configurações de lista de raspagem"""
     with open(file=CRAWLER_LIST_PATH, mode="r") as f:
-        lista_raspagem = f.readlines()
+        lista_raspagem = [linha.strip() for linha in f.readlines()]
         f.close()
+
     logger.info(f"Retornando um total de {len(lista_raspagem)} de itens para serem raspados!")
     return lista_raspagem
 @logs
