@@ -1,0 +1,3 @@
+-i https://pypi.org/simple
+fastapi==0.110.0; python_version >= '3.8'
+playwright==1.41.2; python_version >= '3.8'

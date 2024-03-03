@@ -1,0 +1,23 @@
+{
+    "empresa":{
+        "name":"Nome da empresa",
+        "stars":5,
+        "reviews":1000
+    },
+    "reviews":[
+        {
+            "image":"link",
+            "name":"Nome da Silva",
+            "stars":5,
+            "text":"Comentário",
+            "date":"1 dia atrás"
+        },
+        {
+            "image":"link",
+            "name":"Nome da Silva",
+            "stars":5,
+            "text":"Comentário",
+            "date":"1 dia atrás"
+        }
+    ]
+}
