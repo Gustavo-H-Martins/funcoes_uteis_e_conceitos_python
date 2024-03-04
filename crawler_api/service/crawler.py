@@ -1,6 +1,9 @@
 from playwright.async_api import async_playwright
 import re
 from time import sleep
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from logs import criar_log, logs
 
 # Criando o logger
@@ -9,7 +12,7 @@ logger = criar_log(formato_mensagem)
 
 @logs
 async def raspardor(
-    url: str = r"https://www.google.com/maps/place/Is.Land+%7C+Tricot/@-27.5705975,-48.7999495,10z/data=!3m1!4b1!4m6!3m5!1s0x952747df2ee38217:0x18f915f1e1cbdfe8!8m2!3d-27.5715954!4d-48.4702792!16s%2Fg%2F11ghrc1j8h?entry=ttu"
+    nome_empresa:str = "Games+Safari"
 ) -> dict:
     """Robôzinho que vai raspar os dados solicitados
     Parâmetros:
@@ -17,13 +20,17 @@ async def raspardor(
     Retorno:
         - `retorno_raspagem`: dicionário de dados para populaar base de raspagem de reviews
     """
-
+    url = "https://www.google.com/maps/place/"
     async with async_playwright() as p:
         retorno_raspagem = {"empresa": {"name": "", "stars": 0, "reviews": 0}, "reviews": []}
         # Abre o navegador e carrega a página com a url passada
-        browser = await p.chromium.launch(headless=True)
+        browser = await p.chromium.launch(headless=False)
         page = await browser.new_page()
         await page.goto(url)
+
+        # Procura o Searchbox
+        await page.locator("#searchboxinput").fill(nome_empresa)
+        await page.locator("#searchboxinput").press("Enter")
 
         # Busca o primeiro item da raspagem e dados da empresa
         await page.locator(".hh2c6:nth-child(1)").click()
