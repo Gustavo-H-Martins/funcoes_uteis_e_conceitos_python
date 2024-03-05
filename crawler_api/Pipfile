@@ -9,6 +9,7 @@ fastapi = "==0.110.0"
 pytz = "==2024.1"
 ipykernel = "==6.29.3"
 uvicorn = "==0.27.1"
+python-multipart = "==0.0.9"
 
 [dev-packages]
 

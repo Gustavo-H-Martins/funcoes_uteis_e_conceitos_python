@@ -12,7 +12,7 @@ logger = criar_log(formato_mensagem)
 
 @logs
 async def raspardor(
-    nome_empresa:str = "Games+Safari"
+    url:str = ""
 ) -> dict:
     """Robôzinho que vai raspar os dados solicitados
     Parâmetros:
@@ -20,7 +20,6 @@ async def raspardor(
     Retorno:
         - `retorno_raspagem`: dicionário de dados para populaar base de raspagem de reviews
     """
-    url = "https://www.google.com/maps/place/"
     async with async_playwright() as p:
         retorno_raspagem = {"empresa": {"name": "", "stars": 0, "reviews": 0}, "reviews": []}
         # Abre o navegador e carrega a página com a url passada
@@ -28,9 +27,6 @@ async def raspardor(
         page = await browser.new_page()
         await page.goto(url)
 
-        # Procura o Searchbox
-        await page.locator("#searchboxinput").fill(nome_empresa)
-        await page.locator("#searchboxinput").press("Enter")
 
         # Busca o primeiro item da raspagem e dados da empresa
         await page.locator(".hh2c6:nth-child(1)").click()
@@ -50,7 +46,10 @@ async def raspardor(
 
         # Busca dados de avaliações
         await page.locator(".hh2c6:nth-child(2)").click()
-        for i in range(0, 3):
+        await page.get_by_alt_text("Ordenar").click()
+        await page.locator('#action-menu > div:nth-child(2)').click()
+
+        for i in range(0, 10):
             await page.mouse.wheel(0, 15000)
             sleep(2)
 

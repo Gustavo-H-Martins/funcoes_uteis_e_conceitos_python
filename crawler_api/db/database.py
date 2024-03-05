@@ -56,7 +56,7 @@ def otimizar_banco():
     conn.close()
 
 
-def obter_dados_empresa(nome_empresa) -> str:
+def obter_dados_empresa(url) -> dict:
     # Conecta ao banco
     conn, cursor = abrir_banco()
 
@@ -64,7 +64,7 @@ def obter_dados_empresa(nome_empresa) -> str:
     cursor.execute(f"""
         SELECT nome_empresa, quantidade_reviews, media_stars, avaliacoes_json
         FROM avaliacoes
-        WHERE nome_empresa = {nome_empresa}
+        WHERE url = "{url}"
     """)
 
     # Obtém os resultados da consulta
@@ -84,6 +84,6 @@ def obter_dados_empresa(nome_empresa) -> str:
             "reviews": json.loads(resultado[3])
         }
 
-        return json.dumps(dados_empresa, indent=4)
+        return dados_empresa
 
-    return ""
+    return {"no_data": "sem dados pra ver aqui."}
