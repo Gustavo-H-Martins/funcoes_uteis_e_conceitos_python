@@ -20,7 +20,7 @@ def ler_lista_raspagem() -> list:
     logger.info(f"Retornando um total de {len(lista_raspagem)} de itens para serem raspados!")
     return lista_raspagem
 @logs
-def escrever_lista_raspagem(texto:str):
+def escrever_lista_raspagem(texto:str= ""):
     """Realiza a escrita de dados dentro do arquivo de configurações de lista de raspagem"""
 
     with open(file=CRAWLER_LIST_PATH, mode="+a") as f:

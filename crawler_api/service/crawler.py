@@ -86,5 +86,5 @@ async def raspardor(
                 }
             )
         await browser.close()
-    logger.info("Raspado dados com sucesso!")
+    logger.info("Raspados dados com sucesso!")
     return retorno_raspagem

@@ -38,11 +38,11 @@ async def read_root():
 
 @app.get("/raspagem/")
 async def read_item(
-    url: str = None, limit: int = None, start_stars: int = None, end_stars: int = None
+    url: str = None, limit: int = 0, start_stars: int = 0, end_stars: int = 5
 ):  
     if url not in lista_raspagem:
         escrever_lista_raspagem(url)
-        logger.warning(f"empresa {url} ainda não mapeada!")
+        logger.warning(f"Link {url} ainda não mapeado!")
         retorno_api = jsonable_encoder(
             {   "return": "alerta!",
                 "empresa": url,
@@ -50,6 +50,6 @@ async def read_item(
             }
         )
     else:
-        retorno_api = obter_dados_empresa(url=url)
+        retorno_api = obter_dados_empresa(url=url, limit=limit, start_stars=start_stars, end_stars=end_stars)
         logger.info("Retornando dados para requisição com sucesso!")
     return retorno_api
