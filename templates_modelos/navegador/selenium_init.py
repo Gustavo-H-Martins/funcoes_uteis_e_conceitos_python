@@ -14,7 +14,7 @@ class SeleniumDriver:
         resolucao = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
 
         chrome_options = Options()
-        ##chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--headless')
         chrome_options.add_experimental_option(
             "prefs", {"profile.default_content_setting_values.geolocation": 1}
         )
