@@ -32,7 +32,8 @@ def escrever_lista_raspagem(url:str):
 
     if not os.path.exists(CRAWLER_LIST_PATH):
         with open(CRAWLER_LIST_PATH, "w") as f:
-            dados = {"1":url}
+            posicao = "1"
+            dados = {posicao:url}
             dump(dados, f, indent=2, separators=(",", ": "), sort_keys=True)
     else:
         with open(CRAWLER_LIST_PATH, "r+") as f:
@@ -43,6 +44,7 @@ def escrever_lista_raspagem(url:str):
             f.seek(0)
             f.truncate()
             dump(data, f, indent=2, separators=(",", ": "), sort_keys=True)
+    return posicao
 
 @logs
 def deletar_lista_raspasgem(texto:str):

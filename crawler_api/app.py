@@ -32,9 +32,9 @@ async def adicionar_url(item: Item):
     if item.token != autenticacao:
         raise HTTPException(status_code=401, detail="Token de autenticação inválido")
     
-    escrever_lista_raspagem(item.url)
+    id = escrever_lista_raspagem(item.url)
     
-    return {"message": f"URL {item.url} adicionada com sucesso!"}
+    return {"message": f"URL {item.url} adicionada com id: {id} com sucesso!"}
 
 @app.get("/raspagem/")
 async def read_item(
