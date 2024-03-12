@@ -3,32 +3,46 @@ from service import raspardor
 from db import inserir_dados
 from logs import criar_log, logs
 import re
+from json import load, dump
+
 
 # Criando o logger
 formato_mensagem = f'{__name__}:{__name__}'
 logger = criar_log(formato_mensagem)
 
 # CONSTANTE
-CRAWLER_LIST_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),"config", "lista_raspagem.txt"))
+CRAWLER_LIST_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__),"config", "lista_raspagem.json"))
+
+@logs
+def ler_json(caminho:str) -> dict:
+    with open (file=caminho, mode="r") as f:
+        conteudo = load(f)
+    return conteudo
+
 @logs
 def ler_lista_raspagem() -> list:
     """Realiza a leitura dos dados dentro do arquivo de configurações de lista de raspagem"""
-    with open(file=CRAWLER_LIST_PATH, mode="r") as f:
-        lista_raspagem = [linha.strip() for linha in f.readlines()]
-        f.close()
+    lista_raspagem = ler_json(CRAWLER_LIST_PATH)
 
     logger.info(f"Retornando um total de {len(lista_raspagem)} de itens para serem raspados!")
-    return lista_raspagem
+    return list(lista_raspagem.values())
 @logs
-def escrever_lista_raspagem(texto:str= ""):
+def escrever_lista_raspagem(url:str):
     """Realiza a escrita de dados dentro do arquivo de configurações de lista de raspagem"""
 
-    with open(file=CRAWLER_LIST_PATH, mode="+a") as f:
-        f.write(f"{texto.strip()}\n")
-        f.close()
-    
-    logger.info(f"Salvo linha com valor {texto}")
-
+    if not os.path.exists(CRAWLER_LIST_PATH):
+        with open(CRAWLER_LIST_PATH, "w") as f:
+            dados = {"1":url}
+            dump(dados, f, indent=2, separators=(",", ": "), sort_keys=True)
+    else:
+        with open(CRAWLER_LIST_PATH, "r+") as f:
+            data = load(f)
+            posicao = len(data) + 1
+            dados = {f"{posicao}":url}
+            data.update(dados)
+            f.seek(0)
+            f.truncate()
+            dump(data, f, indent=2, separators=(",", ": "), sort_keys=True)
 
 @logs
 def deletar_lista_raspasgem(texto:str):

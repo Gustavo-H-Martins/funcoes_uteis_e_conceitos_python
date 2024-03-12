@@ -56,13 +56,13 @@ def otimizar_banco():
     conn.close()
 
 
-def obter_dados_empresa(url:str, limit:int = 0, start_stars:int = 0, end_stars:int= 5) -> dict:
+def obter_dados_empresa(id:int, limit:int = 0, start_stars:int = 0, end_stars:int= 5) -> dict:
     # Conecta ao banco
     conn, cursor = abrir_banco()
     query_padrao = f"""
         SELECT nome_empresa, quantidade_reviews, media_stars, avaliacoes_json
         FROM avaliacoes
-        WHERE url = "{url}"
+        WHERE id = {id}
     """
     print(end_stars)
     # Executa a consulta para obter os dados da empresa
