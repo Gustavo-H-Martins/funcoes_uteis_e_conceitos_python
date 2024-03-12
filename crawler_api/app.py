@@ -14,7 +14,8 @@ logger = criar_log(formato_mensagem)
 app = FastAPI()
 autenticacao = "suaReviewInc"
 class Item(BaseModel):
-    url: str
+    url_empresa: str
+    id_empresa: str
     token: str
 # constante
 ROBO_CRAWLER = "./update_base.py"
@@ -32,9 +33,9 @@ async def adicionar_url(item: Item):
     if item.token != autenticacao:
         raise HTTPException(status_code=401, detail="Token de autenticação inválido")
     
-    id = escrever_lista_raspagem(item.url)
+    escrever_lista_raspagem(id=item.id_empresa, url=item.url_empresa)
     
-    return {"message": f"URL {item.url} adicionada com id: {id} com sucesso!"}
+    return {"message": f"URL {item.url_empresa} adicionada com id: {item.id_empresa} com sucesso!"}
 
 @app.get("/raspagem/")
 async def read_item(

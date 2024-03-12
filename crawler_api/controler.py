@@ -27,24 +27,21 @@ def ler_lista_raspagem() -> list:
     logger.info(f"Retornando um total de {len(lista_raspagem)} de itens para serem raspados!")
     return list(lista_raspagem.values())
 @logs
-def escrever_lista_raspagem(url:str):
+def escrever_lista_raspagem(id:str, url:str):
     """Realiza a escrita de dados dentro do arquivo de configurações de lista de raspagem"""
 
     if not os.path.exists(CRAWLER_LIST_PATH):
         with open(CRAWLER_LIST_PATH, "w") as f:
-            posicao = "1"
-            dados = {posicao:url}
+            dados = {id:url}
             dump(dados, f, indent=2, separators=(",", ": "), sort_keys=True)
     else:
         with open(CRAWLER_LIST_PATH, "r+") as f:
             data = load(f)
-            posicao = len(data) + 1
-            dados = {f"{posicao}":url}
+            dados = {id:url}
             data.update(dados)
             f.seek(0)
             f.truncate()
             dump(data, f, indent=2, separators=(",", ": "), sort_keys=True)
-    return posicao
 
 @logs
 def deletar_lista_raspasgem(texto:str):
