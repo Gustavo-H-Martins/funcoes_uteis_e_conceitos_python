@@ -2,8 +2,8 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from urllib.parse import quote
-from db import obter_dados_empresa
-from controler import  escrever_lista_raspagem, ler_lista_raspagem
+from db import obter_dados_empresa, deletar_dados_por_id
+from controler import  escrever_lista_raspagem
 from fastapi import FastAPI, HTTPException, Header
 import subprocess
 from logs import criar_log
@@ -28,7 +28,17 @@ async def read_root():
     subprocess.run(comando)
     return {"home": "Esta api retorna dados extraídos de reviews do GMaps."}
 
-@app.post("/adicionar-url/")
+# Endpoint DELETE para deletar dados por ID
+@app.delete("/deletar-dados")
+async def deletar_dados(id: str, token: str = Header(...)):
+    if token != autenticacao:
+        raise HTTPException(status_code=401, detail="Token de autenticação inválido")
+    
+    deletar_dados_por_id(id)
+    
+    return {"message": f"Dados com ID {id} deletados com sucesso!"}
+
+@app.post("/adicionar-url")
 async def adicionar_url(item: Item):
     if item.token != autenticacao:
         raise HTTPException(status_code=401, detail="Token de autenticação inválido")
@@ -37,7 +47,7 @@ async def adicionar_url(item: Item):
     
     return {"message": f"URL {item.url_empresa} adicionada com id: {item.id_empresa} com sucesso!"}
 
-@app.get("/raspagem/")
+@app.get("/raspagem")
 async def read_item(
     token: str = Header(...),
     id: int = 0, limit: int = 0, start_stars: int = 0, end_stars: int = 5

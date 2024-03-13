@@ -44,6 +44,19 @@ def inserir_dados(id:str, nome_empresa:str, quantidade_reviews:int, media_stars:
     conn.commit()
     conn.close()
 
+def deletar_dados_por_id(id:str):
+    # Conecta ao banco
+    conn, cursor = abrir_banco()
+    
+    # Deleta a linha da tabela com o ID fornecido
+    cursor.execute("""
+        DELETE FROM avaliacoes WHERE id=?
+    """, (id,))
+    
+    # Salva as alterações e fecha a conexão
+    conn.commit()
+    conn.close()
+
 def otimizar_banco():
     """Realiza uma operação vacuum no banco para otimizar e limpar as transações que possam não ter sido concluídas."""
     # Conecta ao banco
