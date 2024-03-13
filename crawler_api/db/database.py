@@ -18,7 +18,7 @@ def criar_tabela():
     # Criação da tabela para armazenar os dados
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS avaliacoes (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id INTEGER PRIMARY KEY,
             nome_empresa TEXT,
             quantidade_reviews INTEGER,
             media_stars REAL,
@@ -31,14 +31,14 @@ def criar_tabela():
     conn.commit()
     conn.close()
 
-def inserir_dados(nome_empresa:str, quantidade_reviews:int, media_stars:float, avaliacoes_json:str, url:str):
+def inserir_dados(id:str, nome_empresa:str, quantidade_reviews:int, media_stars:float, avaliacoes_json:str, url:str):
     # Conecta ao banco
     conn, cursor = abrir_banco()
     # Insere ou substitui os dados na tabela
     cursor.execute("""
-        INSERT OR REPLACE INTO avaliacoes (nome_empresa, quantidade_reviews, media_stars, avaliacoes_json, url)
-        VALUES (?, ?, ?, ?, ?)
-    """, (nome_empresa, quantidade_reviews, media_stars, avaliacoes_json, url))
+        INSERT OR REPLACE INTO avaliacoes (id, nome_empresa, quantidade_reviews, media_stars, avaliacoes_json, url)
+        VALUES (?, ?, ?, ?, ?, ?)
+    """, (id, nome_empresa, quantidade_reviews, media_stars, avaliacoes_json, url))
 
     # Salva as alterações e fecha a conexão
     conn.commit()

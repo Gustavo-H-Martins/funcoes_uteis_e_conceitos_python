@@ -20,12 +20,12 @@ def ler_json(caminho:str) -> dict:
     return conteudo
 
 @logs
-def ler_lista_raspagem() -> list:
+def ler_lista_raspagem() -> dict:
     """Realiza a leitura dos dados dentro do arquivo de configurações de lista de raspagem"""
     lista_raspagem = ler_json(CRAWLER_LIST_PATH)
 
     logger.info(f"Retornando um total de {len(lista_raspagem)} de itens para serem raspados!")
-    return list(lista_raspagem.values())
+    return lista_raspagem
 @logs
 def escrever_lista_raspagem(id:str, url:str):
     """Realiza a escrita de dados dentro do arquivo de configurações de lista de raspagem"""
