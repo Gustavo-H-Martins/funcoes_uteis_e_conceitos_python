@@ -23,7 +23,7 @@ async def raspardor(
     async with async_playwright() as p:
         retorno_raspagem = {"empresa": {"name": "", "stars": 0, "reviews": 0}, "reviews": []}
         # Abre o navegador e carrega a página com a url passada
-        browser = await p.chromium.launch(headless=False)
+        browser = await p.chromium.launch(headless=True)
         page = await browser.new_page()
         await page.goto(url)
 

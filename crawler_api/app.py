@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from urllib.parse import quote
 from db import obter_dados_empresa, deletar_dados_por_id
-from controler import  escrever_lista_raspagem
+from controler import  escrever_lista_raspagem, ler_lista_raspagem
 from fastapi import FastAPI, HTTPException, Header
 import subprocess
 from logs import criar_log
@@ -12,7 +12,7 @@ formato_mensagem = f'{__name__}:{__name__}'
 logger = criar_log(formato_mensagem)
 
 app = FastAPI()
-autenticacao = "suaReviewInc"
+autenticacao = "7beed2ea8ae25d0fd50d8942b938b202"
 class Item(BaseModel):
     url_empresa: str
     id_empresa: str
@@ -47,6 +47,29 @@ async def adicionar_url(item: Item):
     
     return {"message": f"URL {item.url_empresa} adicionada com id: {item.id_empresa} com sucesso!"}
 
+
+@app.get("/lista_raspagem")
+async def read_item(
+    token: str = Header(...)
+):  
+    if token != autenticacao:
+        raise HTTPException(status_code=401, detail="Token de autenticação inválido")
+
+    try:
+        lista_raspagem = ler_lista_raspagem()
+        lista_raspagem["status"] = "200"
+            
+    except Exception as E:
+        logger.warning(f"Id {id} não encontrado")
+        lista_raspagem = jsonable_encoder(
+            {   "status": "204",
+                "detalhes": "sem conteúdo para mostrar",
+                "return": "alerta!",
+                "erro": E
+            }
+        )
+    return lista_raspagem
+
 @app.get("/raspagem")
 async def read_item(
     token: str = Header(...),
@@ -63,7 +86,9 @@ async def read_item(
     except Exception as E:
         logger.warning(f"Id {id} não encontrado")
         retorno_api = jsonable_encoder(
-            {   "return": "alerta!",
+            {   "status": "204",
+                "detalhes": "sem conteúdo para mostrar",
+                "return": "alerta!",
                 "erro": E
             }
         )

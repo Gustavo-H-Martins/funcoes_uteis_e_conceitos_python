@@ -128,4 +128,4 @@ def obter_dados_empresa(id:int, limit:int = 0, start_stars:int = 0, end_stars:in
 
         return dados_empresa
 
-    return {"no_data": "sem dados pra ver aqui."}
+    return {"status": "204", "detalhes": "sem conteúdo para mostrar", "return": "😛"}
